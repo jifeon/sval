@@ -63,7 +63,7 @@ class Sval {
     if (typeof nameOrModules !== 'object') return
 
     const names = getOwnNames(nameOrModules)
- 
+
     for (let i = 0; i < names.length; i++) {
       const name = names[i]
       const pointer = this.state.symbols.set(name, 'var').pointer
@@ -79,6 +79,12 @@ class Sval {
     //   const opCode = this.state.opCodes[i]
     //   console.log(i, (OP as any)[opCode.op], typeof opCode.val === 'undefined' ? '' : opCode.val)
     // }
+    execute(this.state)
+  }
+
+  runAST(ast: any) {
+    hoist(ast, this.state)
+    compile(ast, this.state)
     execute(this.state)
   }
 }
