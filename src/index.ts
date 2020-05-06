@@ -83,9 +83,9 @@ class Sval {
   }
 
   runAST(ast: any) {
-    hoist(ast, this.state)
     compile(ast, this.state)
     execute(this.state)
+    return this.state.stack.shift()
   }
 }
 
